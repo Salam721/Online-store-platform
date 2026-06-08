@@ -1,0 +1,50 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: "3.12"
+      nodejs: "18"
+    commands:
+      - echo "Installing dependencies..."
+      - pip install -r requirements.txt
+      - pip install -r requirements-dev.txt
+      - npm install -g aws-cdk
+
+  pre_build:
+    commands:
+      - echo "Running linting and static analysis..."
+      - python -m flake8 lambda_code/ layers/ --max-line-length=120 --ignore=E501,W503 || true
+      - echo "Pre-build checks complete"
+
+  build:
+    commands:
+      - echo "Running unit tests..."
+      - python -m pytest tests/unit/ -v --tb=short
+        --junitxml=test-results/unit-results.xml
+      - echo "Running integration tests..."
+      - python -m pytest tests/integration/ -v --tb=short
+        --junitxml=test-results/integration-results.xml
+      - echo "Synthesising CDK templates..."
+      - cdk synth --context environment=${ENVIRONMENT:-dev}
+
+  post_build:
+    commands:
+      - echo "Build completed on $(date)"
+      - echo "Environment: ${ENVIRONMENT:-dev}"
+
+artifacts:
+  files:
+    - "**/*"
+  base-directory: cdk.out
+  name: BuildArtifact-$(date +%Y%m%d%H%M%S)
+
+reports:
+  UnitTestResults:
+    files:
+      - "test-results/unit-results.xml"
+    file-format: JUNITXML
+  IntegrationTestResults:
+    files:
+      - "test-results/integration-results.xml"
+    file-format: JUNITXML

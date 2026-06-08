@@ -1,0 +1,5 @@
+{
+  "Records": [{
+    "body": "{\"order_id\": \"abc-123\", \"customer_id\": \"cust_001\", \"items\": [{\"product_id\": \"prod_001\", \"quantity\": 1}], \"total_amount\": 199.99, \"customer_tier\": \"regular\", \"order_type\": \"standard\", \"timestamp\": \"2026-01-01T00:00:00Z\"}"
+  }]
+}

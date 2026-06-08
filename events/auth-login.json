@@ -1,0 +1,7 @@
+{
+  "httpMethod": "POST",
+  "path": "/auth/login",
+  "body": "{\"email\": \"customer@example.com\", \"password\": \"SecurePass123!\"}",
+  "pathParameters": null,
+  "queryStringParameters": null
+}

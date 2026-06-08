@@ -1,0 +1,17 @@
+{
+  "httpMethod": "GET",
+  "path": "/users/profile",
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": null,
+  "requestContext": {
+    "authorizer": {
+      "claims": {
+        "sub": "user-uuid-123",
+        "email": "customer@example.com",
+        "name": "Jane Smith",
+        "cognito:groups": ""
+      }
+    }
+  }
+}

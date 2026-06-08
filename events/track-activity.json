@@ -1,0 +1,8 @@
+{
+  "httpMethod": "POST",
+  "path": "/activity",
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"event_type\": \"product_view\", \"user_id\": \"user_123\", \"session_id\": \"sess_abc\", \"product_id\": \"prod_001\"}",
+  "requestContext": {"identity": {"userArn": "arn:aws:iam::123456789012:user/test"}}
+}

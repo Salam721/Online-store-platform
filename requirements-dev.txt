@@ -1,0 +1,9 @@
+pytest==7.4.0
+moto[dynamodb,s3,sqs,sns,events]==4.2.0
+boto3==1.28.0
+pydantic==1.10.13
+responses==0.25.0
+freezegun==1.4.0
+locust==2.24.0
+aws-embedded-metrics==3.3.0
+aws-lambda-powertools==2.40.0

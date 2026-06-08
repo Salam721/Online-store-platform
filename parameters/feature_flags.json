@@ -1,0 +1,31 @@
+{
+  "flags": {
+    "new-checkout-flow": {
+      "name": "New Checkout Flow",
+      "description": "Redesigned checkout experience with improved UX",
+      "attributes": {
+        "enabled":            {"constraints": {"type": "boolean", "required": true}},
+        "rollout-percentage": {"constraints": {"type": "number",  "minimum": 0, "maximum": 100}}
+      }
+    },
+    "ai-recommendations": {
+      "name": "AI Product Recommendations",
+      "description": "ML-powered personalised product recommendations",
+      "attributes": {
+        "enabled": {"constraints": {"type": "boolean"}}
+      }
+    },
+    "real-time-inventory": {
+      "name": "Real-time Inventory Sync",
+      "description": "Show live inventory counts on product pages",
+      "attributes": {
+        "enabled": {"constraints": {"type": "boolean"}}
+      }
+    }
+  },
+  "values": {
+    "new-checkout-flow":    {"enabled": false, "rollout-percentage": 0},
+    "ai-recommendations":   {"enabled": false},
+    "real-time-inventory":  {"enabled": true}
+  }
+}

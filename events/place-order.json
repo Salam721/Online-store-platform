@@ -1,0 +1,8 @@
+{
+  "httpMethod": "POST",
+  "path": "/orders",
+  "pathParameters": null,
+  "queryStringParameters": null,
+  "body": "{\"customer_id\": \"cust_123\", \"items\": [{\"product_id\": \"prod_001\", \"quantity\": 2, \"name\": \"Wireless Headphones\"}], \"total_amount\": 399.98, \"customer_tier\": \"regular\", \"order_type\": \"standard\"}",
+  "requestContext": {"identity": {"userArn": "arn:aws:iam::123456789012:user/test"}}
+}

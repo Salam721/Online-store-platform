@@ -1,0 +1,1 @@
+{"httpMethod":"POST","pathParameters":null,"queryStringParameters":null,"body":"{\"title\":\"Gaming Mouse\",\"category\":\"Electronics\",\"description\":\"High precision gaming mouse\",\"price\":79.99}","requestContext":{"identity":{"userArn":"arn:aws:iam::123456789012:user/test"}}}

@@ -1,0 +1,71 @@
+# Artillery load test configuration for the online store API.
+#
+# Install:  npm install -g artillery@latest
+# Run:      artillery run artillery.yml --target https://<your-api-url>
+#
+# Override target:
+#   DEV:     artillery run artillery.yml --target https://<dev-api>
+#   STAGING: artillery run artillery.yml --target https://<staging-api>
+
+config:
+  target: "https://REPLACE_WITH_YOUR_API_URL"
+  phases:
+    - name:        "Warm up"
+      duration:    60
+      arrivalRate: 5
+    - name:        "Ramp up"
+      duration:    120
+      arrivalRate: 20
+      rampTo:      50
+    - name:        "Peak traffic"
+      duration:    300
+      arrivalRate: 50
+    - name:        "Scale down"
+      duration:    60
+      arrivalRate: 10
+
+  defaults:
+    headers:
+      Content-Type: "application/json"
+
+scenarios:
+  - name: "Product browsing (most common)"
+    weight: 50
+    flow:
+      - get:
+          url: "/products"
+          expect:
+            - statusCode: 200
+      - get:
+          url: "/products/prod_001"
+          expect:
+            - statusCode: [200, 404]
+
+  - name: "Category filtering"
+    weight: 20
+    flow:
+      - get:
+          url: "/products?category=Electronics"
+          expect:
+            - statusCode: 200
+
+  - name: "Activity tracking"
+    weight: 20
+    flow:
+      - post:
+          url: "/activity"
+          json:
+            event_type: "product_view"
+            user_id:    "load_test_user_{{ $randomInt(1, 500) }}"
+            session_id: "sess_{{ $randomString() }}"
+            product_id: "prod_001"
+          expect:
+            - statusCode: [200, 202]
+
+  - name: "Health check"
+    weight: 10
+    flow:
+      - get:
+          url: "/health"
+          expect:
+            - statusCode: [200, 503]

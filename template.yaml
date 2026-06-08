@@ -1,0 +1,92 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Globals:
+  Function:
+    Timeout: 30
+    Runtime: python3.12
+    CodeUri: lambda_code/
+    Layers:
+      - !Ref ProductUtilsLayer
+    Environment:
+      Variables:
+        APP_ENV: dev
+        PRODUCTS_TABLE: Products
+        PRODUCT_IMAGE_BUCKET: local-bucket
+        CACHE_ENDPOINT: localhost
+        CACHE_PORT: "6379"
+
+Resources:
+  ProductUtilsLayer:
+    Type: AWS::Serverless::LayerVersion
+    Properties:
+      LayerName: product-utils
+      ContentUri: layers/product_utils/
+      CompatibleRuntimes:
+        - python3.12
+
+  GetProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: get_product.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /products/{id}
+            Method: get
+
+  QueryProductsFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: query_products.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /products
+            Method: get
+
+  InsertProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: insert_product.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /products
+            Method: post
+
+  UpdateProductFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: update_product.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /products/{id}
+            Method: put
+
+  GetUploadUrlFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: get_upload_url.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /products/{id}/upload-url
+            Method: post
+
+  GetDownloadUrlFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: get_download_url.handler
+      Events:
+        Api:
+          Type: Api
+          Properties:
+            Path: /products/{id}/image-url
+            Method: get

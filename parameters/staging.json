@@ -1,0 +1,16 @@
+{
+  "environment":              "staging",
+  "lambda_memory_mb":         768,
+  "lambda_timeout_seconds":   30,
+  "cache_node_type":          "cache.t3.small",
+  "cache_node_count":         1,
+  "ecs_desired_count":        1,
+  "ec2_instance_type":        "t3.small",
+  "asg_min":                  1,
+  "asg_desired":              2,
+  "asg_max":                  5,
+  "log_retention_days":       30,
+  "enable_detailed_monitoring": true,
+  "dynamo_removal_policy":    "RETAIN",
+  "s3_removal_policy":        "RETAIN"
+}

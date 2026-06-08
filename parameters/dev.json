@@ -1,0 +1,16 @@
+{
+  "environment":              "dev",
+  "lambda_memory_mb":         512,
+  "lambda_timeout_seconds":   30,
+  "cache_node_type":          "cache.t3.micro",
+  "cache_node_count":         1,
+  "ecs_desired_count":        1,
+  "ec2_instance_type":        "t3.micro",
+  "asg_min":                  1,
+  "asg_desired":              1,
+  "asg_max":                  3,
+  "log_retention_days":       7,
+  "enable_detailed_monitoring": false,
+  "dynamo_removal_policy":    "DESTROY",
+  "s3_removal_policy":        "DESTROY"
+}
