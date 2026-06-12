@@ -1,0 +1,23 @@
+# AWS credentials
+.aws/
+*.pem
+*.key
+
+# CDK context (contains account ID)
+cdk.context.json
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+
+# Node
+node_modules/
+
+# CDK output
+cdk.out/
+
+# Environment files
+.env
+.env.*
